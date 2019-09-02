@@ -32,5 +32,44 @@ namespace NC.HttpClient
             }
             return sb.ToString();
         }
+
+
+        public static ParameterCollection ParseQueryString(string queryStr)
+        {
+            var result = new ParameterCollection();
+            queryStr = queryStr.Trim();
+
+            if(string.IsNullOrWhiteSpace(queryStr))
+            {
+                return result; // empty string results in empty parameter collection
+            }
+
+            if( queryStr[0] == '?')
+            {
+                queryStr.Substring(1); // skip the question mark
+            }
+
+            if (queryStr.Contains("?"))
+            {
+                throw new Exception($"Query string can only contain one question mark (Which is the optional first character).  A question mark was seen at position {queryStr.IndexOf('?')}.  This is not allowed.");
+            }
+
+            var pairs = queryStr.Split('&');
+            int pairCount = 0; // this is for better error messages
+            foreach( var p in pairs)
+            {
+                var keyVal = p.Split('=');
+                if( keyVal.Length != 2)
+                {
+                    throw new Exception($"Error with key value pair #{pairCount}.  It did not contain an equals or something else is malformed about it");
+                }
+                var key = WebUtility.UrlDecode(keyVal[0]);
+                var val = WebUtility.UrlDecode(keyVal[1]);
+                result.Add(key, val);
+                ++pairCount;
+            }
+
+            return result;
+        }
     }
 }

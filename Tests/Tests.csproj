@@ -15,4 +15,7 @@
   <ItemGroup>
     <ProjectReference Include="..\NC.HttpClient\NC.HttpClient.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="lib\" />
+  </ItemGroup>
 </Project>
