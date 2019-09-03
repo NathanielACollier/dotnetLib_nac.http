@@ -18,5 +18,13 @@ namespace Tests_WebApiForTesting.Controllers
         {
             return "Hello World!";
         }
+
+
+
+        [HttpPost, Route("testPostHash")]
+        public string testPostHashMapDictionary([FromBody] Dictionary<string,object> args)
+        {
+            return args.First().Value as string;
+        }
     }
 }
