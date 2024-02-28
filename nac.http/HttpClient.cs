@@ -5,8 +5,8 @@ using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
 
 namespace nac.http
 {
@@ -52,12 +52,34 @@ namespace nac.http
         public async Task<T> PostJSONAsync<T>(string relativeUrl, object obj)
         {
             // see: https://stackoverflow.com/questions/6117101/posting-jsonobject-with-httpclient-from-web-api
-            var jsonStr = JsonConvert.SerializeObject(obj);
+            var jsonStr = jsonSerialize(obj);
+            
             var jsonStrContent = new StringContent(jsonStr, Encoding.UTF8, "application/json");
 
             var response = await this.http.PostAsync(relativeUrl, jsonStrContent);
 
             return await ProcessHttpResponse<T>(response);
+        }
+
+
+        private string jsonSerialize(object obj)
+        {
+            string jsonText = System.Text.Json.JsonSerializer.Serialize(value: obj, options: new JsonSerializerOptions
+            {
+                
+            });
+
+            return jsonText;
+        }
+
+        private T jsonDeserialize<T>(string jsonText)
+        {
+            T result = System.Text.Json.JsonSerializer.Deserialize<T>(json: jsonText, options: new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true
+            });
+
+            return result;
         }
 
         public async Task<T> PostFormUrlEncodeAsync<T>(string relativeUrl, IEnumerable<KeyValuePair<string, string>> values, HttpStatusCode[] successCodes = null)
@@ -154,7 +176,7 @@ namespace nac.http
                         // try and convert it
                         try
                         {
-                            return JsonConvert.DeserializeObject<T>(responseStr);
+                            return jsonDeserialize<T>(responseStr);
                         }
                         catch (Exception ex)
                         {
@@ -165,7 +187,7 @@ namespace nac.http
                     }
                     else
                     {
-                        T result = JsonConvert.DeserializeObject<T>(responseStr);
+                        T result = jsonDeserialize<T>(responseStr);
                         return result;
                     }
 
