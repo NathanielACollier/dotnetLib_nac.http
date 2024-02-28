@@ -9,7 +9,7 @@ namespace Tests
         [TestMethod]
         public void TestSimpleQueryString()
         {
-            var queryStr = new NC.HttpClient.ParameterCollection()
+            var queryStr = new nac.http.ParameterCollection()
                             .Add("test", "Great Barrier Biscuit Factory")
                             .ToString();
 
@@ -20,7 +20,7 @@ namespace Tests
         [TestMethod]
         public void TestCreateFromEmptyString()
         {
-            var result = NC.HttpClient.ParameterCollection.ParseQueryString("");
+            var result = nac.http.ParameterCollection.ParseQueryString("");
 
             Assert.IsTrue(result.ToString().Length == 0);
         }
@@ -30,7 +30,7 @@ namespace Tests
         {
             lib.Utility.assertThrows(() =>
             {
-                var result = NC.HttpClient.ParameterCollection.ParseQueryString("??"); // bad query string
+                var result = nac.http.ParameterCollection.ParseQueryString("??"); // bad query string
             });
         }
 
@@ -40,7 +40,7 @@ namespace Tests
         {
             var queryStr = "knights=of&the=seven&kingdom=game&of=thrones";
 
-            var builder = NC.HttpClient.ParameterCollection.ParseQueryString(queryStr);
+            var builder = nac.http.ParameterCollection.ParseQueryString(queryStr);
 
             Assert.IsTrue(string.Equals(queryStr, builder.ToString()));
         }
@@ -52,12 +52,12 @@ namespace Tests
             var querystr1 = "knights";
             lib.Utility.assertThrows(() =>
             {
-                NC.HttpClient.ParameterCollection.ParseQueryString(querystr1);
+                nac.http.ParameterCollection.ParseQueryString(querystr1);
             });
             var querystr2 = "betty&boopity&boop";
             lib.Utility.assertThrows(() =>
             {
-                NC.HttpClient.ParameterCollection.ParseQueryString(querystr2);
+                nac.http.ParameterCollection.ParseQueryString(querystr2);
             });
         }
 

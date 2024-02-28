@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Text;
 
-namespace NC.HttpClient
+namespace nac.http
 {
     // original from: https://stackoverflow.com/questions/17096201/build-query-string-for-system-net-httpclient-get
     public class ParameterCollection
