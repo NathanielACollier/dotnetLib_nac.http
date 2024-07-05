@@ -43,7 +43,7 @@ public class HttpClient
 
         var curlLoggingHandler = new nac.http.logging.curl.LoggingHandler(baseHandler);
 
-        var http = new System.Net.Http.HttpClient(curlLoggingHandler);
+        this.http = new System.Net.Http.HttpClient(curlLoggingHandler);
 
         if (args.timeout.HasValue)
         {

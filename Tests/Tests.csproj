@@ -2,9 +2,6 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-
-    <IsPackable>false</IsPackable>
-
     <LangVersion>latestmajor</LangVersion>
   </PropertyGroup>
 
@@ -18,7 +15,8 @@
   <ItemGroup>
     <ProjectReference Include="..\nac.http\nac.http.csproj" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="lib\" />
-  </ItemGroup>
+
+  
+  
+  
 </Project>

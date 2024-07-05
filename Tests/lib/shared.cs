@@ -6,7 +6,15 @@ namespace Tests.lib
         private static nac.http.HttpClient __client;
         public static nac.http.HttpClient client
         {
-            get { return __client ?? (__client = new nac.http.HttpClient("http://localhost:5000")); }
+            get
+            {
+                if (__client == null)
+                {
+                    __client = new nac.http.HttpClient("http://localhost:5000", useWindowsAuth: false);
+                }
+
+                return __client;
+            }
         }
     }
 }
