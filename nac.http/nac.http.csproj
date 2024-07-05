@@ -4,5 +4,13 @@
     <TargetFramework>net6.0</TargetFramework>
     <LangVersion>latestmajor</LangVersion>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="nac.json" Version="1.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\nac.http.logging.curl\nac.http.logging.curl.csproj" />
+  </ItemGroup>
   
 </Project>
