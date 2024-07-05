@@ -3,6 +3,12 @@
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <LangVersion>latestmajor</LangVersion>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Version>1.0.1</Version>
+    <PackageId>nac.http</PackageId>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/NathanielACollier/dotnetLib_nac.http</PackageProjectUrl>
+    <Description>HttpClient with alot of helper methods built in to make it simpler to use</Description>
   </PropertyGroup>
 
   <ItemGroup>
