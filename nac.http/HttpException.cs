@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Net;
 
-namespace NC.HttpClient
+namespace nac.http
 {
     public class HttpException : Exception
     {

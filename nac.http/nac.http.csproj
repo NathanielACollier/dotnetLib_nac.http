@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <LangVersion>latestmajor</LangVersion>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Version>1.0.1</Version>
+    <PackageId>nac.http</PackageId>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/NathanielACollier/dotnetLib_nac.http</PackageProjectUrl>
+    <Description>HttpClient with alot of helper methods built in to make it simpler to use</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="nac.json" Version="1.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\nac.http.logging.curl\nac.http.logging.curl.csproj" />
+  </ItemGroup>
+  
+</Project>

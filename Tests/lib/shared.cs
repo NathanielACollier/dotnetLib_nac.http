@@ -3,10 +3,18 @@ namespace Tests.lib
 {
     public static class shared
     {
-        private static NC.HttpClient.HttpClient __client;
-        public static NC.HttpClient.HttpClient client
+        private static nac.http.HttpClient __client;
+        public static nac.http.HttpClient client
         {
-            get { return __client ?? (__client = new NC.HttpClient.HttpClient("https://localhost:5001")); }
+            get
+            {
+                if (__client == null)
+                {
+                    __client = new nac.http.HttpClient("http://localhost:5000", useWindowsAuth: false);
+                }
+
+                return __client;
+            }
         }
     }
 }

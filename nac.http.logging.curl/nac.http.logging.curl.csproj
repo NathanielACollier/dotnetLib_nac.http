@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+	<TargetFramework>netstandard2.0</TargetFramework>
+	<LangVersion>latestmajor</LangVersion>
+	<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+	  <Version>1.0.1</Version>
+	  <PackageId>nac.http.logging.curl</PackageId>
+	  <PackageLicenseExpression>MIT</PackageLicenseExpression>
+	  <PackageProjectUrl>https://github.com/NathanielACollier/dotnetLib_nac.http</PackageProjectUrl>
+	  <Description>Http Logging Handler that produces curl commands</Description>
+  </PropertyGroup>
+
+</Project>
