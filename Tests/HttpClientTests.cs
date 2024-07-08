@@ -8,7 +8,7 @@ namespace Tests
     [TestClass]
     public class HttpClientTests
     {
-        private string baseUrl = "api/general/";
+        private string baseUrl = "api/general";
 
         [TestMethod]
         public async Task TestSimpleGet()

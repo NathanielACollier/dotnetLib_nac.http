@@ -4,7 +4,7 @@
     <TargetFramework>net6.0</TargetFramework>
     <LangVersion>latestmajor</LangVersion>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>1.0.1</Version>
+    <Version>1.0.2</Version>
     <PackageId>nac.http</PackageId>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/NathanielACollier/dotnetLib_nac.http</PackageProjectUrl>
@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\nac.http.logging.curl\nac.http.logging.curl.csproj" />
+    <ProjectReference Include="..\nac.http.logging.har\nac.http.logging.har.csproj" />
   </ItemGroup>
   
 </Project>
