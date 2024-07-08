@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\nac.http.logging.curl\nac.http.logging.curl.csproj" />
+    <ProjectReference Include="..\nac.http.logging.har\nac.http.logging.har.csproj" />
   </ItemGroup>
   
 </Project>
