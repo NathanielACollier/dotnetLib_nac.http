@@ -62,4 +62,17 @@ public static class utility
 
         return new model.Page[] { apiCallPage };
     }
+
+
+
+    public static System.Net.CookieContainer ParseCookieHeader(string cookieHeader, System.Uri uri)
+    {
+        var cookies = new System.Net.CookieContainer();
+        cookies.SetCookies(uri: uri,
+            cookieHeader: cookieHeader);
+
+        return cookies;
+    }
+    
+    
 }

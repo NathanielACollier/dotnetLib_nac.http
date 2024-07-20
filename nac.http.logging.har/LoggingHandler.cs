@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -94,7 +95,7 @@ public class LoggingHandler : DelegatingHandler
             }).ToArray();
         
         // cookies
-        respModel.Cookies = ParseCookiesFromAllHeaders(respModel.Headers);
+        respModel.Cookies = ParseCookiesFromAllHeaders( respModel.Headers, requestUri: response.RequestMessage.RequestUri);
         
         // content
         respModel.BodySize = 0;
@@ -142,7 +143,7 @@ public class LoggingHandler : DelegatingHandler
                 Value = headerValue
             }).ToArray();
 
-        reqModel.Cookies = ParseCookiesFromAllHeaders(reqModel.Headers);
+        reqModel.Cookies = ParseCookiesFromAllHeaders(reqModel.Headers, requestUri: request.RequestUri);
         
         // querystring
         reqModel.QueryString = GenerateRequestQueryParams(request);
@@ -160,24 +161,29 @@ public class LoggingHandler : DelegatingHandler
         reqModel.HeadersSize = request.Headers.ToString().Length;
     }
 
-    private Cooky[] ParseCookiesFromAllHeaders(Cooky[] reqModelHeaders)
+    private Cooky[] ParseCookiesFromAllHeaders(Cooky[] reqModelHeaders, System.Uri requestUri)
     {
-        var cookieHeader = reqModelHeaders.FirstOrDefault(h => string.Equals(h.Name, "Set-Cookie"));
-
+        var cookieHeaderQuery = reqModelHeaders
+            .Where(h => string.Equals(h.Name, "Set-Cookie", StringComparison.OrdinalIgnoreCase))
+            .ToList();
+        
         var cookieList = new List<model.Cooky>();
-
-        if (cookieHeader == null)
+        if (!cookieHeaderQuery.Any())
         {
             return cookieList.ToArray();
         }
+        
+        // Incase their are more than one set-cookie header, append them together
+        string cookieHeaderValue = string.Join(',', cookieHeaderQuery.Select(c => c.Value));
 
-        foreach (var cookieStr in cookieHeader.Value.Split(';'))
+        var cookies = lib.utility.ParseCookieHeader(cookieHeaderValue, uri: requestUri);
+
+        foreach (System.Net.Cookie cookie in cookies.GetAllCookies())
         {
-            var parts = cookieStr.Split('=');
-            cookieList.Add(new model.Cooky
+            cookieList.Add(new Cooky
             {
-                Name = parts[0].Trim(),
-                Value = parts[1].Trim()
+                Name = cookie.Name,
+                Value = cookie.Value
             });
         }
 
