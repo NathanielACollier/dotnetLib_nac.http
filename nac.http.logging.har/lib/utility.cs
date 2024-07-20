@@ -62,4 +62,28 @@ public static class utility
 
         return new model.Page[] { apiCallPage };
     }
+
+
+    /**
+     # Parse Cookies Documentation
+     + See stack overflow: https://stackoverflow.com/questions/28979882/parsing-cookies/78773639#78773639
+     ## Microsoft Cookie Parser
+     + There is an internal cookieParser that Microsoft maintains System.Net.CookieParser: https://github.com/dotnet/runtime/blob/ef5664875a63000b853edfeda909c410c6927b92/src/libraries/Common/src/System/Net/CookieParser.cs#L517-L517
+     + That can be called via SetCookies on CookieContainer: https://github.com/dotnet/runtime/blob/ef5664875a63000b853edfeda909c410c6927b92/src/libraries/System.Net.Primitives/src/System/Net/CookieContainer.cs#L1028-L1028
+     
+     ## Third Party Cookie Parser from github.com/RyuaNerin
+     + See: https://gist.github.com/RyuaNerin/a03b5f6ee6866d571ebd9714c1043b32
+     
+     */
+
+    public static System.Net.CookieContainer ParseCookieHeader(string cookieHeader, System.Uri uri)
+    {
+        var cookies = new System.Net.CookieContainer();
+        cookies.SetCookies(uri: uri,
+            cookieHeader: cookieHeader);
+
+        return cookies;
+    }
+    
+    
 }
