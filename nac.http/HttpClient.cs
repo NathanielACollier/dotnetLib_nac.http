@@ -22,7 +22,7 @@ public class HttpClient
     //  You cannot keep adding optional args, that won't work because programs compile to a method signature and if you add optional args you can't bind to that old method signature
     //  see: https://stackoverflow.com/questions/9884664/system-missingmethodexception-after-adding-an-optional-parameter
 
-    public HttpClient(string baseUrl, bool useWindowsAuth = true, TimeSpan? timeout = null) :
+    public HttpClient(string baseUrl="", bool useWindowsAuth = true, TimeSpan? timeout = null) :
         this(baseUrl: baseUrl,
             args: new model.HttpClientConfigurationOptions
             {
@@ -51,7 +51,11 @@ public class HttpClient
             http.Timeout = args.timeout.Value;
         }
 
-        http.BaseAddress = new Uri(baseUrl, UriKind.Absolute);
+        if (!string.IsNullOrWhiteSpace(baseUrl))
+        {
+            http.BaseAddress = new Uri(baseUrl, UriKind.Absolute);
+        }
+        
         http.DefaultRequestHeaders.Accept.Clear();
 
         if (args.useBearerTokenAuthentication)

@@ -22,9 +22,9 @@ namespace Tests_WebApiForTesting.Controllers
 
 
         [HttpPost, Route("testPostHash")]
-        public string testPostHashMapDictionary([FromBody] Dictionary<string,object> args)
+        public System.Text.Json.Nodes.JsonNode testPostHashMapDictionary([FromBody] System.Text.Json.Nodes.JsonNode args)
         {
-            return args.First().Value as string;
+            return args;
         }
     }
 }
