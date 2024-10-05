@@ -32,9 +32,18 @@ public class HttpClient
     { }
 
     // OLD METHOD:  This is the redone old method to be based on an argument block so it's runtime decisions
-    public HttpClient(string baseUrl, model.HttpClientConfigurationOptions args)
+    public HttpClient(string baseUrl = null, model.HttpClientConfigurationOptions args = null)
     {
         var baseHandler = new System.Net.Http.HttpClientHandler();
+
+        if (args == null)
+        {
+            // default options
+            args = new model.HttpClientConfigurationOptions
+            {
+                timeout = new TimeSpan(0, 10, 0)
+            };
+        }
 
         if (args.useWindowsAuth)
         {
